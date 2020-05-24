@@ -1,5 +1,8 @@
 package com.todo.utils;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.GeneratedValue;
@@ -10,17 +13,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
+@Getter @Setter
 public abstract class AbstractEntity implements Serializable, Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @CreatedDate
-    private Date createDate;
+    private Date created;
 
-    public Long getId() {
-        return id;
-    }
+    @UpdateTimestamp
+    private Date updated;
 
     public boolean isPersisted() {
         return id != null;

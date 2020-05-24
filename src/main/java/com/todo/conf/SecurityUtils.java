@@ -1,5 +1,6 @@
 package com.todo.conf;
 
+import com.todo.utils.ExposedViews;
 import com.vaadin.flow.server.ServletHelper;
 import com.vaadin.flow.shared.ApplicationConstants;
 import org.apache.logging.log4j.LogManager;
@@ -21,9 +22,14 @@ public final class SecurityUtils {
     public static boolean isAppInternalRequest(HttpServletRequest request) {
         final String requestType = request.getParameter(ApplicationConstants.REQUEST_TYPE_PARAMETER);
         logger.debug("request type parameter:: "+requestType);
-        return requestType != null
+        logger.debug("request URI:: "+request.getRequestURI());
+        //logger.debug("ServletHelper.RequestType.values():: "+ ServletHelper.RequestType.values());
+        if (requestType != null
                 && Stream.of(ServletHelper.RequestType.values())
-                .anyMatch(r -> r.getIdentifier().equals(requestType));
+                .anyMatch(r -> r.getIdentifier().equals(requestType))){
+            return true;
+        }
+        return ExposedViews.getAllUriList().contains(request.getRequestURI());
     }
 
     public static boolean isUserLoggedIn() {

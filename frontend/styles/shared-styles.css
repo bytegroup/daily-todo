@@ -5,27 +5,111 @@
 */
 
 /* Example: CSS class name to center align the content . */
+body{
+    background-color: #cccccc;
+    background-image: linear-gradient(#e6f2ff, #99ccff);
+}
+
 .centered-content {
   margin: 0 auto;
   max-width: 250px;
 }
 
 /* Main layout */
+#navbarTop{
+    position: fixed!important;
+    display: contents!important;
+    background: none!important;
+}
+
+[part="navbar"] {
+    box-shadow: var(--lumo-box-shadow-xl);
+    position: fixed!important;
+    display: contents!important;
+    background: none!important;
+}
 
 a[highlight] {
     font-weight: bold;
     text-decoration: underline;
 }
 
+.header-container {
+    border:1px #99ccff solid;
+    height: 100%;
+    background-color: #cccccc;
+    background-image: linear-gradient(#e6f2ff, #99ccff);
+}
+
+.header-content {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.header-content span {
+    font-size: 30px;
+    font-weight: bolder;
+    color: #0059b3;
+    /*background-image: linear-gradient(#e6f2ff, #99ccff);*/
+}
+
 .header {
-    padding: 0 var(--lumo-space-m);
+    padding: 10px var(--lumo-space-m);
+    margin: 0 auto;
+    width: 70%!important;
 }
 
 .header h1.logo {
     font-size: 1em;
     margin: var(--lumo-space-m);
+    color: var(--lumo-secondary-text-color);
 }
 
+/*body*/
+vaadin-app-layout{
+    height: auto;
+}
+div.body-container{
+    margin: 0 auto;
+    border: 1px #66b3ff solid;
+    height: 100%;
+    width: 69%;
+    background-image: linear-gradient(#e6f2ff, #99ccff);
+}
+
+
+/*login*/
+vaadin-login-form{
+    padding: 0 250px;
+    display: block;
+}
+vaadin-form-layout{
+    padding: 10px 20px;
+}
+[part="vaadin-login-native-form-wrapper"]{
+    display: contents;
+    margin: 0 100px;
+}
+
+.login-view{
+    height: auto!important;
+}
+
+.form-title, .form-btn-row{
+    width: 100%!important;
+}
+
+.form-title h3{
+    margin: 0 10px;
+    color: var(--lumo-secondary-text-color);
+}
+.form-btn-row{
+    justify-content: center;
+    padding-right: 30px;
+    display: inline-grid;
+    margin-top: 20px;
+}
 
 /* List view */
 .list-view .content {
