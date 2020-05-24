@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.stream.Stream;
@@ -37,5 +38,15 @@ public final class SecurityUtils {
         return authentication != null
                 && !(authentication instanceof AnonymousAuthenticationToken)
                 && authentication.isAuthenticated();
+    }
+
+    public static String getLoggedUserName(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(isUserLoggedIn()){
+            User loggedUser= (User) authentication.getPrincipal();
+            //logger.debug(loggedUser);
+            return loggedUser.getUsername();
+        }
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.todo.auth;
 
+import com.todo.conf.SecurityUtils;
 import com.todo.user.entity.User;
 import com.todo.user.service.UserSerive;
 import com.todo.user.service.UserServiceImpl;
@@ -60,6 +61,7 @@ public class RegistrationForm extends FormLayout {
     private final Binder<User> binder;
 
     public RegistrationForm(UserSerive userSerive){
+        boolean editAction=false;
         this.userSerive = userSerive;
         addClassName("registration-form");
 
@@ -72,7 +74,19 @@ public class RegistrationForm extends FormLayout {
 
         binder = new BeanValidationBinder<>(User.class);
 
-        binder.setBean(new User());
+        String loggedUserName= SecurityUtils.getLoggedUserName();
+        logger.debug("LoggedUserName: "+loggedUserName);
+        if (loggedUserName==null){
+            binder.setBean(new User());
+        }else {
+            editAction=true;
+            binder.setBean(userSerive.loadUserByUserName(loggedUserName));
+            password.setVisible(false);
+            password.setEnabled(false);
+            username.setEnabled(false);
+            email.setEnabled(false);
+        }
+
         binder.bindInstanceFields(this);
 
         binder.forMemberField(username).withValidator(

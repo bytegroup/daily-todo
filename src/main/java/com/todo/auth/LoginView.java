@@ -1,17 +1,13 @@
 package com.todo.auth;
 
 import com.todo.conf.SecurityUtils;
-import com.todo.layout.AuthLayout;
+import com.todo.layout.HomeLayout;
 import com.todo.utils.ExposedViews;
 import com.todo.utils.LayoutUtils;
 import com.todo.utils.Utils;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.charts.events.ClickEvent;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginI18n;
-import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
@@ -19,15 +15,9 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 @PageTitle("Login | Todo")
-@Route(value = "login", layout = AuthLayout.class)
+@Route(value = "login", layout = HomeLayout.class)
 public class LoginView extends VerticalLayout implements BeforeEnterObserver {
     private static final Logger logger= LogManager.getLogger(LoginView.class);
 

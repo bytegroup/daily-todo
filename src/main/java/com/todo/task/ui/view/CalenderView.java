@@ -10,7 +10,7 @@ public class CalenderView extends HorizontalLayout {
 
     public CalenderView(){
         setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-        addClassName("form-btn-row");
+        addClassName("calender-view");
         setSpacing(false);
         setWidthFull();
 

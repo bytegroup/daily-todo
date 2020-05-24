@@ -63,13 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-                return userSerive.loadUserByUsername(s);
-            }
-        };
-        //return (username)->{return userSerive.loadUserByUsername(username);};
+        return (username)->userSerive.loadUserByUsername(username);
     }
 
     @Bean

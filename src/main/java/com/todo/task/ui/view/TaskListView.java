@@ -10,7 +10,7 @@ public class TaskListView extends HorizontalLayout {
 
     public TaskListView(){
         setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-        addClassName("form-btn-row");
+        addClassName("tasklist-view");
         setSpacing(false);
         setWidthFull();
 

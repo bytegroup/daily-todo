@@ -6,6 +6,7 @@ import java.util.List;
 
 public enum ExposedViews {
     LOGIN("/login"),
+    LOGOUT("/logout"),
     REGISTRATION("/registration");
 
     private String uri;
