@@ -1,26 +1,27 @@
 package com.todo.user.entity;
 
 import com.todo.utils.AbstractEntity;
-import com.todo.validator.unique.UniqueKey;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 @Entity(name = "usr")
 @Getter @Setter @ToString
 /*@Table(uniqueConstraints = { @UniqueConstraint(columnNames = {
         "username", "email"}) })*/
-/*@UniqueKey(columnNames={"username"})*/
 public class User extends AbstractEntity {
+
+    @Id
+    @GeneratedValue(generator = "user_id_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq")
+    private Long id;
 
     @NotNull
     @NotBlank(message = "Please enter username")
     @Column(name = "username", unique = true)
-    @Size(min = 4, max = 10, message = "Min 4 and Max 10 characters allowed")
     private String username;
 
     @NotNull
@@ -35,7 +36,7 @@ public class User extends AbstractEntity {
     private String email;
 
     @Size(min = 4, max = 14, message = "Min 4 and Max 14 digits allowed")
-    @Pattern(regexp=("^\\d{10}$"), message = "Please enter valid phone no.")
+    @Pattern(regexp=("[0-9]+"), message = "Only numbers are allowed")
     @Column(name = "phone")
     private String phone;
 
@@ -46,4 +47,9 @@ public class User extends AbstractEntity {
 
     @Column(name = "address")
     private String address;
+
+    @Override
+    public boolean isPersisted() {
+        return id != null;
+    }
 }

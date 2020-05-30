@@ -1,24 +1,22 @@
 package com.todo.user.service;
 
 import com.todo.user.entity.User;
+import com.vaadin.flow.data.binder.ValidationResult;
+import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.data.validator.AbstractValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
 
-@Component
-public class UserValidator implements Validator {
+public class UserValidator extends AbstractValidator<User> {
 
     @Autowired
     private UserSerive userService;
 
-    @Override
-    public boolean supports(Class<?> aClass) {
-        return User.class.equals(aClass);
+    public UserValidator(String errMsg){
+        super(errMsg);
     }
 
-    @Override
     public void validate(Object o, Errors errors) {
         User user = (User) o;
 
@@ -38,6 +36,11 @@ public class UserValidator implements Validator {
         /*if (!user.getPasswordConfirm().equals(user.getPassword())) {
             errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
         }*/
+    }
+
+    @Override
+    public ValidationResult apply(User user, ValueContext valueContext) {
+        return this.toResult(user, true);
     }
 }
 

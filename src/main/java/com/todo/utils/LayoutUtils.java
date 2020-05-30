@@ -2,14 +2,18 @@ package com.todo.utils;
 
 import com.todo.auth.RegistrationView;
 import com.todo.conf.SecurityUtils;
+import com.todo.task.entity.Comment;
+import com.todo.task.entity.Task;
 import com.todo.task.ui.HomeView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.contextmenu.SubMenu;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -37,7 +41,6 @@ public class LayoutUtils {
 
         if (SecurityUtils.isUserLoggedIn()){
             headContainer.add(headerContent, new ProfileMenuBar(SecurityUtils.getLoggedUserName()));
-            //headContainer.add(headerContent, profileMenuBar(SecurityUtils.getLoggedUserName()));
 
         }else {
             headContainer.add(headerContent);
@@ -52,28 +55,6 @@ public class LayoutUtils {
         return header;
     }
 
-    public static HorizontalLayout getHomeHeader(){
-        Div headContainer= new Div();
-        headContainer.setClassName("header-container");
-        Div headerContent= new Div();
-        headerContent.setClassName("header-content");
-
-        Span logo = new Span("Todo - The Daily Tasks");
-        logo.setSizeFull();
-        logo.addClassName("logo");
-        logo.addClassName("centered-content");
-        headerContent.add(logo);
-
-        MenuBar profileMenuBar= profileMenuBar(SecurityUtils.getLoggedUserName());
-        headContainer.add(headerContent, profileMenuBar);
-        HorizontalLayout header = new HorizontalLayout(headContainer);
-        header.expand(headContainer);
-        header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-        header.setWidth("100%");
-        header.addClassName("header");
-
-        return header;
-    }
 
     public static Div getBodyContainer(){
         Div body= new Div();
@@ -95,14 +76,10 @@ public class LayoutUtils {
 
         MenuItem profileMenu = menuBar.addItem("Profile :-: "+profileName);
         profileMenu.getElement().getStyle().set("font-size", "var(--lumo-font-size-s)");
-        //profileMenu.getElement().getParent().setProperty("style", "background:none");
 
         SubMenu profileSubMenu = profileMenu.getSubMenu();
         MenuItem userProfile = profileSubMenu.addItem(new RouterLink("Profile", RegistrationView.class));
         userProfile.getElement().getStyle().set("font-size", "var(--lumo-font-size-s)");
-        /*userProfile.addClickListener(e ->
-                userProfile.getUI().ifPresent(ui ->
-                        ui.navigate(Utils.getRelativePath(ExposedViews.REGISTRATION.getUri()))));*/
         MenuItem logOut = profileSubMenu.addItem("Log Out");
         logOut.getElement().getStyle().set("font-size", "var(--lumo-font-size-s)");
         logOut.addClickListener(e ->

@@ -3,7 +3,6 @@ package com.todo.auth;
 import com.todo.conf.SecurityUtils;
 import com.todo.user.entity.User;
 import com.todo.user.service.UserSerive;
-import com.todo.user.service.UserServiceImpl;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -17,16 +16,11 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.PropertyId;
-import com.vaadin.flow.function.SerializablePredicate;
 import com.vaadin.flow.shared.Registration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.plugins.validation.constraints.Required;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
-import java.util.Iterator;
-import java.util.List;
+import org.hibernate.validator.constraints.UniqueElements;
 
 public class RegistrationForm extends FormLayout {
     private static final Logger logger= LogManager.getLogger(RegistrationForm.class);
@@ -90,12 +84,14 @@ public class RegistrationForm extends FormLayout {
         binder.bindInstanceFields(this);
 
         binder.forMemberField(username).withValidator(
-                v -> userSerive.findAllAsStream().noneMatch(u -> u.getUsername().equals((v.trim()))),
+                v -> binder.getBean().isPersisted()
+                        || userSerive.findAllAsStream().noneMatch(u -> u.getUsername().equals((v.trim()))),
                 "Already taken, please try with another one!"
         ).bind(User::getUsername, User::setUsername).validate();
 
         binder.forMemberField(email).withValidator(
-                v -> userSerive.findAllAsStream().noneMatch(u -> u.getEmail().equals((v.trim()))),
+                v -> binder.getBean().isPersisted()
+                        ||userSerive.findAllAsStream().noneMatch(u -> u.getEmail().equals((v.trim()))),
                 "Email already used"
         ).bind(User::getEmail, User::setEmail).validate();
 

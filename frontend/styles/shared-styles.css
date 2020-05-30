@@ -8,6 +8,9 @@
 body{
     background-color: #cccccc;
     background-image: linear-gradient(#e6f2ff, #99ccff);
+    width: auto;
+    height: auto;
+    min-height: 669px;
 }
 
 .centered-content {
@@ -131,7 +134,119 @@ vaadin-form-layout{
     margin-top: 20px;
 }
 
+/*Body contents*/
+div.content-row{
+    width: 100%;
+    align-content: center;
+    float: left;
+    justify-content: center;
+}
+div.content-col{
+    width: 47%;
+    align-content: center;
+    justify-content: center;
+    float: left;
+    /*border: 1px #0059b3 solid;*/
+    height: 250px;
+    margin: 12px;
+}
+div.tasklist-view{
+    position: relative;
+    background-color: #fbfbfb;
+    color: #5a5a5a;
+    width: 100%;
+    -webkit-box-shadow: 0 10px 50px -20px #8773c1;
+    box-shadow: 0 10px 50px -20px #8773c1;
+    margin: 0 auto;
+    overflow: hidden;
+    z-index: 1;
+    height: 250px;
+    padding: 10px;
+}
+div.task-view{
+    width: 97%;
+    border: 1px #0059b3 solid;
+    min-height: 200px;
+    margin: 12px;
+    position: relative;
+    background-color: #fbfbfb;
+    color: #5a5a5a;
+    -webkit-box-shadow: 0 10px 50px -20px #8773c1;
+    box-shadow: 0 10px 50px -20px #8773c1;
+    overflow: hidden;
+    z-index: 1;
+    height: auto;
+    padding: 10px;
+    text-align: justify;
+}
+.selected-task-date{
+    float: left;
+    font-weight: bold;
+    font-size: 14px;
+    width: 69%;
+    /*color: var(--_lumo-button-color, var(--lumo-primary-text-color));
+    background-color: var(--_lumo-button-background-color, var(--lumo-contrast-5pct));
+    padding: 0 10px;
+    border-radius: 4px;*/
+}
+.add-new-task-btn{
+    width: 30%;
+    font-size: 14px;
+    float: right;
+    height: 37px;
+}
+.task-view-heading{
+    font-weight: bold;
+}
+
+.comment-view-list{
+    margin: 0;
+}
+
 /* List view */
+div.list-box-container{
+    overflow: auto;
+    height: 81%;
+}
+vaadin-list-box{
+}
+vaadin-list-box vaadin-item{
+    font-size: 14px;
+    min-height: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 1px 0;
+    background: linear-gradient(#e6f2ff, #99ccff);
+}
+vaadin-list-box vaadin-item:hover{
+    background: linear-gradient(#e6f2ff, #b3deff);
+}
+div.task-list-item{
+    /*border-bottom: 1px #555 solid;*/
+    padding-left: 5px;
+}
+div.task-list-item:before{
+    content: "\2022";
+    color: #006400;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: 0;
+    font-size: 26px;
+    line-height: 17px;
+
+}
+
+div.task-list-item span.task-list-item-time{
+    font-weight: bold;
+    color: #a52a2a;
+    font-size: 16px;
+}
+
+div.task-list-item span.task-list-item-name{
+    font-size: 14px;
+}
+
 .list-view .content {
     display: flex;
 }

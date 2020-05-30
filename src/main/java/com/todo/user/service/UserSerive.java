@@ -13,4 +13,5 @@ public interface UserSerive {
     UserDetails loadUserByUsername(String username);
     List<User> findAll();
     Stream<User> findAllAsStream();
+    boolean isUniqueEmail(String email, String oldEmail);
 }

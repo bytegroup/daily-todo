@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserSerive{
 
     @Override
     public User loadUserByUserName(String username){
+        logger.debug("loading user by username: "+username);
         return userRepository.findByUsername(username);
     }
 
@@ -63,5 +64,12 @@ public class UserServiceImpl implements UserSerive{
     @Override
     public Stream<User> findAllAsStream(){
         return userRepository.findAll().stream();
+    }
+
+    @Override
+    public boolean isUniqueEmail(String email, String oldEmail){
+        User user= userRepository.findByEmail(email);
+        if (user==null) return true;
+        return oldEmail != null && oldEmail.equalsIgnoreCase(user.getEmail());
     }
 }

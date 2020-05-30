@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class Utils {
     private static final Logger logger= LogManager.getLogger(Utils.class);
@@ -16,6 +17,9 @@ public class Utils {
     }
 
     public static boolean isEmptyObjList(Collection<?> value) {
+        return value == null || value.isEmpty();
+    }
+    public static boolean isEmptyObjMap(Map<?,?> value) {
         return value == null || value.isEmpty();
     }
     public static boolean isEmpty(List list)  {

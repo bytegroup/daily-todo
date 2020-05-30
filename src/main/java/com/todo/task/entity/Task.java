@@ -5,12 +5,13 @@ import com.todo.utils.AbstractEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,19 +19,27 @@ import java.util.List;
 @Getter @Setter @ToString
 public class Task extends AbstractEntity{
 
-    @NotNull
+    @Id
+    @GeneratedValue(generator = "task_id_seq", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "task_id_seq", sequenceName = "task_id_seq")
+    private Long id;
+
+    @NotNull(message = "Please input time")
     @Column(name = "time")
-    private Time time;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME, pattern = "hh:mm a")
+    private LocalTime time;
 
-    @NotNull
+    @NotNull(message = "Please input date")
     @Column(name = "date")
-    private Date date;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate date;
 
     @NotNull
-    @NotEmpty
-    @Column(name = "taskname")
+    @NotBlank(message = "Please enter username")
+    @Column(name = "task_name")
     private String taskName;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User taskOwner;
@@ -38,6 +47,11 @@ public class Task extends AbstractEntity{
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "comment", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
     private List<Comment> comments = new LinkedList<>();
+
+    @Override
+    public boolean isPersisted() {
+        return id != null;
+    }
 }
