@@ -15,6 +15,7 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
@@ -97,9 +98,10 @@ public class TaskListView extends Div {
     }
 
     private static Component getListItem(Task task){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("h:mm a");
         Div listItem = new Div();
         listItem.addClassName("task-list-item");
-        Span time= new Span(task.getTime()+"\n");
+        Span time= new Span(task.getTime().format(dateTimeFormatter));
         time.addClassName("task-list-item-time");
         Span taskName= new Span(task.getTaskName());
         taskName.addClassName("task-list-item-name");
