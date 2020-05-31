@@ -13,6 +13,7 @@ import com.todo.utils.ExposedViews;
 import com.todo.utils.LayoutUtils;
 import com.todo.utils.Utils;
 import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JavaScript;
 import com.vaadin.flow.component.dependency.NpmPackage;
@@ -24,6 +25,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 
+@Tag(Tag.DIV)
 @PageTitle("TaskBoard | Todo")
 @Route(value = "", layout = HomeLayout.class)
 @CssImport(value = "./evo-calendar/css/evo-calendar.css")

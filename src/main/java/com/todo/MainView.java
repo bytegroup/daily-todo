@@ -1,13 +1,11 @@
 package com.todo;
 
+import com.todo.layout.HomeLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
@@ -26,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * A new instance of this class is created for every new user and every
  * browser tab/window.
  */
-@Route(value = "todo")
+@Route(value = "todo", layout = HomeLayout.class)
 @PWA(name = "Todo Vaadin Application",
         shortName = "todo App",
         description = "This is a todo app build using Spring boot and Vaadin",
@@ -65,24 +63,6 @@ public class MainView extends VerticalLayout {
         addClassName("centered-content");
 
         add(textField, button);
-
-        VerticalLayout todosList = new VerticalLayout(); // (1)
-        TextField taskField = new TextField(); // (2)
-        Button addButton = new Button("Add"); // (3)
-        addButton.addClickShortcut(Key.ENTER);
-        addButton.addClickListener(click -> {
-            // (4)
-            Checkbox checkbox = new Checkbox(taskField.getValue());
-            todosList.add(checkbox);
-        });
-        add( // (5)
-                new H1("Vaadin Todo"),
-                todosList,
-                new HorizontalLayout(
-                        taskField,
-                        addButton
-                )
-        );
     }
 
 }

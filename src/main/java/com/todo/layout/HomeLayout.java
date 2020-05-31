@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @CssImport(value = "./styles/shared-styles.css", themeFor = "vaadin-app-layout")
+@CssImport(value = "./styles/vaadin-text-field-styles.css", themeFor = "vaadin-text-field")
 public class HomeLayout extends AppLayout{
     private static final Logger logger= LogManager.getLogger(HomeLayout.class);
 
