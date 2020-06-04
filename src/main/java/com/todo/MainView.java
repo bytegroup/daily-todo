@@ -1,5 +1,6 @@
-package com.routine;
+package com.todo;
 
+import com.todo.layout.HomeLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -23,10 +24,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * A new instance of this class is created for every new user and every
  * browser tab/window.
  */
-@Route
-@PWA(name = "Vaadin Application",
-        shortName = "Vaadin App",
-        description = "This is an example Vaadin application.",
+@Route(value = "todo", layout = HomeLayout.class)
+@PWA(name = "Todo Vaadin Application",
+        shortName = "todo App",
+        description = "This is a todo app build using Spring boot and Vaadin",
         enableInstallPrompt = false)
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/vaadin-text-field-styles.css", themeFor = "vaadin-text-field")
@@ -41,8 +42,10 @@ public class MainView extends VerticalLayout {
      */
     public MainView(@Autowired GreetService service) {
 
+
+
         // Use TextField for standard text input
-        TextField textField = new TextField("Your name");
+        TextField textField = new TextField("Your name", "tst", "tst");
 
         // Button click listeners can be defined as lambda expressions
         Button button = new Button("Say hello",
